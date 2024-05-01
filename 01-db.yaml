@@ -1,8 +1,8 @@
 - name: configure DB server
-  hosts: localhost
+  hosts: db
   become: yes
   vars:
-    login_host: localhost
+    login_host: db.daws78s1.online
   # vars_prompt:
   #   - name: mysql_root_password
   #     prompt: enter MYSQL root_password
@@ -18,6 +18,14 @@
       name: mysqld
       state: started
       enabled: yes
+  
+  - name: Install mysql python dependencies
+    ansible.builtin.pip:
+      name:
+      - PyMySQL
+      - cryptography
+      executable: pip3.9
+
 # check password is already setup or not
   - name: check db connection
     community.mysql.mysql_info:
