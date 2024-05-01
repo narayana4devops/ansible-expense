@@ -7,6 +7,7 @@
     - name: mysql_root_password
       prompt: enter MYSQL root_password
       private: no
+
   tasks:
   - name: Install MYSQL server
     ansible.builtin.dnf:
@@ -26,7 +27,7 @@
       - cryptography
       executable: pip3.9
 
-# check password is already setup or not
+  # check password is already setup or not
   - name: check db connection
     community.mysql.mysql_info:
       login_user: root
@@ -41,4 +42,4 @@
       
   - name: setup root password
     ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ mysql_root_password }}"
-    when: conn_output.failed is True
+    when: conn_output.failed is true
