@@ -2,7 +2,7 @@
   hosts: db
   become: yes
   vars:
-    login_host: db.daws78s1.online
+    login_host: "{{DB_URL}}" #db.daws78s1.online
   vars_prompt:
     - name: mysql_root_password
       prompt: enter MYSQL root_password
